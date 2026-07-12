@@ -1,0 +1,376 @@
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+
+  --sidebar-bg: var(--bg);
+  --main-bg: var(--bg);
+  --btn-text: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+
+  font-family: "Pally";
+
+}
+
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fdf7ff 0%, #f5f3ff 100%);
+  color: var(--text);
+  font-family: var(--sans);
+}
+
+@media (max-width: 1024px) {
+  :root {
+    font-size: 16px;
+  }
+}
+
+.App.light {
+  --bg: #ffffff;
+  --text: #6b6375;
+  --text-h: #08060d;
+  --border: #e5e4e7;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --sidebar-bg: #ffffff;
+  --main-bg: #ffffff;
+  --btn-text: #463b3b;
+}
+
+.App.dark {
+  --bg: #211a14;
+  --text: #f2e9dc;
+  --text-h: #f2e9dc;
+  --border: #2e303a;
+  --accent: #8fb08f;
+  --accent-bg: rgba(192, 132, 252, 0.15);
+  --accent-border: rgba(192, 132, 252, 0.5);
+  --sidebar-bg: #131b2e;
+  --main-bg: #0b1220;
+  --btn-text: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #b8afa2;
+    --text-h: #f2e9dc;
+    --bg: #211a14;
+    --border: #2e303a;
+    --code-bg: #1f2028;
+    --accent: #8fb08f;
+    --accent-bg: #2c2019;
+    --accent-border: rgba(192, 132, 252, 0.5);
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem;
+}
+
+.app-container {
+  width: min(100%, 1100px);
+  padding: 2rem;
+  background: var(--main-bg);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  margin: 0 0 0.5rem;
+  color: var(--text-h);
+  font-size: 2rem;
+}
+
+.sub {
+  margin: 0;
+  color: var(--text);
+}
+
+.search form {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.search input {
+  flex: 1;
+  min-width: 220px;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.search button {
+  padding: 0.8rem 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: var(--accent);
+  color: var(--btn-text);
+  cursor: pointer;
+}
+
+.categories {
+  margin-bottom: 1.5rem;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.nav li {
+  list-style: none;
+  background-color: var(--accent-bg);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--text);
+}
+
+/* FIXED: was ".nav li:hover, .nav li:active" - :active only applies
+   while the mouse button is physically held down, so it can never
+   look "selected and staying that way." Swapped to a real .active
+   class that React toggles via state, so the highlight persists
+   after the click. */
+.nav li:hover,
+.nav li.active {
+  background-color: var(--accent);
+  color: var(--btn-text);
+}
+
+.nav li:hover a,
+.nav li.active a {
+  color: var(--btn-text);
+}
+
+.main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+.card {
+  background-color: var(--main-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+.card img:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    var(--shadow),
+    rgba(0, 0, 0, 0.1) 0 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0 10px 10px -5px;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    var(--shadow),
+    rgba(0, 0, 0, 0.1) 0 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0 10px 10px -5px;
+}
+.card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+.card h3 {
+  margin: 0;
+  color: var(--text-h);
+}
+
+.card p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.empty-state {
+  padding: 2rem;
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: 1rem;
+  background: var(--accent-bg);
+  color: var(--text);
+}
+
+.empty-state h3 {
+  margin: 0 0 0.5rem;
+  color: var(--text-h);
+}
+
+.empty-state p {
+  margin: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+a {
+  text-decoration: none;
+  color: var(--text-h);
+}
+.recipe-details {
+  background: var(--main-bg);
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow);
+}
+
+.recipe-details-content {
+  animation: scaleIn 0.25s ease-out;
+}
+
+.recipe-details img {
+  width: 100%;
+  border-radius: 12px;
+  margin: 12px 0;
+  max-height: 280px;
+  object-fit: cover;
+}
+
+.recipe-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.recipe-details-header button {
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.6rem 0.9rem;
+  background: var(--accent);
+  color: var(--btn-text);
+  cursor: pointer;
+}
+
+.recipe-status {
+  padding: 1rem 0;
+  color: var(--text);
+}
+
+body{
+  background: var(--bg)
+}
+button{
+  background: transparent;
+  border: none;
+
+}
+button:focus{
+  outline: none;
+}
+button:hover{
+  cursor: pointer;
+}
+button:active{
+  transform: scale(0.95);
+  background: var(--accent);
+}
